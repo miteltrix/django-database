@@ -1,0 +1,20 @@
+<!-- {% load static %} -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <head>
+            <link href="logo.html">
+            <title>{% block title %}My amazing site{% endblock %}</title>
+            <link rel="stylesheet" href="{% static 'templates/css/main.css' %}"/>
+        </head>
+
+    </body>
+    <body>
+        <body>
+            {% block content %}
+            <p>Placeholder text in base template. Replace with page  content.</p>
+            {% endblock content %}
+        </body>
+    </body>
+</html>

@@ -82,7 +82,8 @@ class ServiceModel(models.Model):
        verbose_name = 'Leistung'
        verbose_name_plural = 'Leistungen'
     def __str__(self):
-        return f"{self. volume} {self.UNIT_CHOICES[self.unit]}, {self.name} => Baustelle: {self.project}"
+        unit = self.UNIT_CHOICES[self.unit]
+        return f"{self.volume:.2f} {unit[1]}, {self.name} => Baustelle: {self.project}"
 
 
 class Employees(models.Model):
@@ -97,4 +98,3 @@ class Employees(models.Model):
       verbose_name_plural = 'Mitarbeiter'
     def __str__(self):
         return f"{self.name} {self.surname}"
-
