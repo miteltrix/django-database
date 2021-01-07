@@ -98,3 +98,26 @@ class Employees(models.Model):
       verbose_name_plural = 'Mitarbeiter'
     def __str__(self):
         return f"{self.name} {self.surname}"
+
+
+class Car(models.Model):
+    license_plate = models.CharField(max_length=8)
+    model = models.CharField(max_length=255)
+    service = models.DateField(blank=True, null=True)
+    technical_exam = models.DateField(blank=True, null=True)
+    class Meta:
+        verbose_name = 'Auto'
+        verbose_name_plural = 'Autos'
+    def __str__(self):
+        return self.license_plate
+
+
+class Tripp(models.Model):
+    dirver = models.ForeignKey('Employees', on_delete=models.PROTECT)
+    destination = models.ForeignKey('ProjectModel', on_delete=models.PROTECT)
+    description = models.CharField(max_length=255, blank=True, null=True) 
+    class Meta:
+        verbose_name = 'Fahrtenbuch'
+        verbose_name_plural = 'Fahrtenbucher'
+    def __str__(self):
+        return self.description
