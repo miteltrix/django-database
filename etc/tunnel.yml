@@ -1,0 +1,4 @@
+tunnel: corpdb
+hostname: app.krassini.at
+url: http://app:8000
+credentials-file: /app/secret/f896b5fc-afb5-461b-875d-a559b8b2613b.json

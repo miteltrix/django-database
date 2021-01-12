@@ -1,0 +1,26 @@
+version: '3'
+services:
+  tunnel:
+    image: cloudflare/cloudflared:2020.12.0-amd64
+    # command: cloudflared tunnel --config etc/tunnel.yml run
+    # entrypoint: ["sshd"]
+    # entrypoint: ["cloudflared", "tunnel", "--url", "http://app:8000", "run", "corpdb"]
+    # "--config", "/etc/config.yml", 
+    # command: ["tunnel", "--url", "http://app:8000", "run", "corpdb"]
+    command: ["tunnel", "run"]
+    volumes:
+        - ./etc/tunnel.yml:/etc/cloudflared/config.yml:ro
+        - ./secret:/app/secret:ro
+        # - /root/.cloudflared/cert.pem:/etc/cloudflared/cert.pem:ro
+        - /root/.cloudflared/:/root/.cloudflared/
+  app:
+    build: .
+    depends_on:
+        - tunnel
+    volumes:
+        - ./db.sqlite3:/app/db.sqlite3:rw
+        - ./static:/app/static
+    ports:
+        - 8000:8000
+    container_name: accounting
+    restart: always
